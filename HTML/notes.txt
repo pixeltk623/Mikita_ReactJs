@@ -1,0 +1,10 @@
+Two Types of elements in HTML
+
+1. Block Level
+	
+	H1 - H6 P Div nav article section
+
+	screen => 100% width Cover
+
+2. Inline
+	a, input, label, span => As per required
