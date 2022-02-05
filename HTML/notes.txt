@@ -8,3 +8,15 @@ Two Types of elements in HTML
 
 2. Inline
 	a, input, label, span => As per required
+
+
+Simple Page
+
+Class & Id 
+
+CSS => 3 
+
+blocks
+
+List
+
