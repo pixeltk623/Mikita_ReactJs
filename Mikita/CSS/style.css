@@ -8,13 +8,13 @@ h1{
     color: white;
     text-align: center;
 }
-.home{
+p.home{
     background-color: black;
     color: yellowgreen;
     margin: 10px;
     padding: 20px;
 }
-.about-us{
+p.about-us{
     background-color: black;
     color: cadetblue;
     margin: 10px;
