@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        button{
+            padding: 10px;
+        }
+    </style>
+    <title>Form-4</title>
+</head>
+<body>
+    <form method="post" style="text-align: center; background-color: greenyellow;" >
+        <h3 style="color: red;">Personal Detail</h3>
+        
+        <label>Name:</label>
+        <input type="text" name="Name">
+        <br><br>
+        <label>Password:</label>
+        <input type="password" name="password">
+        <br><br>
+        <label>E-Mail id:</label>
+        <input type="email" name="email">
+        <br><br>
+        <label>Gender:</label>
+        <input type="radio" name="gender" value="Male">Male
+        <input type="radio" name="gender" value="Female">Female
+        <br><br>
+        <label>Contact:</label>
+        <input type="text" name="contact">
+        <br><br>
+        <h3 style="color: red;">Educational Qualification</h3>
+        <label>Degree:</label>
+        <select name="Degree">
+            <option value="">--Select Group--</option>
+        </select>
+        <br><br>
+        <label>Engineering:</label>
+        <select name="Engineering">
+            <option value="">--Select Group--</option>
+        </select>
+        <br><br>
+        <label>Hobbies</label>
+        <input type="checkbox" name="hobbies" value="Playing chess">plyaing chess
+        <input type="checkbox" name="hobbies" value="Reading Books">Reading Books
+        <br><br>
+        <label style="color: red; font-weight: bold;">Address</label>
+        <br><br>
+        <textarea name="Address" cols="35" rows="5"></textarea>
+        <br><br>
+        <label>Attach Resume:<button>Choose File</button> No file chosen</label>
+        <br><br>
+        <button type="submit" style="background-color: rgb(255, 94, 0); color: white;">SUBMIT</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        label{
+            padding-right: 30px;
+            margin-left: 10px;
+        }
+        input{
+         padding-left: 50px; 
+        }
+    </style>
+    <title>form2</title>
+</head>
+<body>
+    <form method="post">
+        <label>Username:</label>
+        <input type="text" name="Username">
+        <br><br>
+        <label>Password:</label>
+        <input type="password" name="Password">
+        <br><br>
+        <label>City of<br>
+               Employment:
+        </label>
+        <input type="text">
+        <br><br>
+        <label>Web Server:</label>
+        <select name="web-service">
+            <option value=>--Choose a server--</option>
+        </select>
+        <br><br>
+        <label>Please Specify<br>
+               Your Role:
+        </label>
+        <input type="radio" name="role1" value="Admin">Admin<br>
+        <input type="radio" name="role2" value="Engineer">Engineer<br>
+        <input type="radio" name="role3" value="Manager">Manager<br>
+        <input type="radio" name="role4" value="Guest">Guest
+        <br><br>
+        <label>Single Sign ON:</label>
+        <input type="checkbox" name="sign-on1" value="Mail"> Mail
+        <br><br>
+        <input type="checkbox" name="sign-on2" value="Payroll"> Payroll
+        <br><br>
+        <input type="checkbox" name="sign-on3" value="Self-service"> Self-Service
+        <br><br>
+        <button>Login</button>
+        <button type="reset">reset</button>
+     </form>
+</body>
+</html>
