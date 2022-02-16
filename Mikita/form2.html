@@ -16,40 +16,54 @@
     <title>form2</title>
 </head>
 <body>
+    <table></table>
     <form method="post">
-        <label>Username:</label>
-        <input type="text" name="Username">
-        <br><br>
-        <label>Password:</label>
-        <input type="password" name="Password">
-        <br><br>
-        <label>City of<br>
-               Employment:
-        </label>
-        <input type="text">
-        <br><br>
-        <label>Web Server:</label>
-        <select name="web-service">
-            <option value=>--Choose a server--</option>
-        </select>
-        <br><br>
-        <label>Please Specify<br>
-               Your Role:
-        </label>
-        <input type="radio" name="role1" value="Admin">Admin<br>
-        <input type="radio" name="role2" value="Engineer">Engineer<br>
-        <input type="radio" name="role3" value="Manager">Manager<br>
-        <input type="radio" name="role4" value="Guest">Guest
-        <br><br>
-        <label>Single Sign ON:</label>
-        <input type="checkbox" name="sign-on1" value="Mail"> Mail
-        <br><br>
-        <input type="checkbox" name="sign-on2" value="Payroll"> Payroll
-        <br><br>
-        <input type="checkbox" name="sign-on3" value="Self-service"> Self-Service
-        <br><br>
-        <button>Login</button>
-        <button type="reset">reset</button>
+        <tr>
+            <th>Username:</th>
+            <td><input type="text" name="Username">
+                <br><br></td>
+        </tr>
+        <tr>
+            <th>Password:</th>
+            <td><input type="password" name="Password">
+                <br><br></td>
+        </tr>
+        <tr>
+            <th>City of<br>
+                Employment:</th>
+            <td> <input type="text">
+                <br><br></td>
+        </tr>
+        <tr>
+            <th>Web Server:</th>
+            <td><select name="web-service">
+                <option value=>--Choose a server--</option>
+            </select>
+            <br><br></td>
+        </tr>
+        <tr>
+            <th>Please Specify<br>
+                Your Role:</th>
+            <td><input type="radio" name="role1" value="Admin">Admin<br>
+                <input type="radio" name="role2" value="Engineer">Engineer<br>
+                <input type="radio" name="role3" value="Manager">Manager<br>
+                <input type="radio" name="role4" value="Guest">Guest
+                <br><br></td>
+        </tr>
+        <tr>
+           <th>Single Sign ON:</th> 
+           <td><input type="checkbox" name="sign-on1" value="Mail"> Mail
+            <br><br>
+            <input type="checkbox" name="sign-on2" value="Payroll"> Payroll
+            <br><br>
+            <input type="checkbox" name="sign-on3" value="Self-service"> Self-Service
+            <br><br></td>
+        </tr>
+        <tr>
+            <th><button type="button">Login</button></th>
+            <th><button type="reset">reset</button></th>
+        </tr>
      </form>
+    </table>
 </body>
 </html>

@@ -4,46 +4,61 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <style>
-       label{
-           margin-right: 50px;
-       }
-   </style>
     <title>Form</title>
 </head>
 <body>
     <fieldset style="background-color: rgba(0, 0, 0, 0.137);">
+     <table>
     <form method="post" style="text-align: center;">
       <center><h2>Registration Form</h2></center>
-        <label>First Name</label>
-        <input type="text" name="First name">
+        <tr>
+            <th>First Name</th>
+            <td><input type="text" name="First name"></td> 
+            <br><br>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td><input type="text" name="Last name"></td>
         <br><br>
-        <label>Last Name</label>
-        <input type="text" name="Last name">
+        </tr>
+        <tr>
+            <th>Nick Name</th>
+            <td><input type="text" name="Nick name"></td>
         <br><br>
-        <label>Nick Name</label>
-        <input type="text" name="Nick name">
+        </tr>
+        <tr>
+            <th>E-Mail</th>
+            <td><input type="email" name="Email"></td>
         <br><br>
-        <label for="">E-Mail</label>
-        <input type="email" name="Email">
+        </tr>
+        <tr>
+            <th>Password</th>
+            <td><input type="password" name="Password"></td>
         <br><br>
-        <label for="password">Password</label>
-        <input type="password">
-        <br><br>
-        <label>Gender</label>
-        <input type="radio" name="gender" value="male">Male
-        <input type="radio" name="gender" value="Female">Female
-        <input type="radio" name="gender" value="Other">Other
-        <br><br>
-        <label>Mobile</label>
-        <input type="text">
-        <br><br>
-        <label for="">Address</label>
-        <textarea name="" id="" cols="20" rows="5"></textarea>
-        <br><br>
-        <button type="submit">Submit</button>
-        <button type="reset">Reset</button>
+        </tr>
+        <tr>
+            <th>Gender</th>
+            <td><input type="radio" name="gender" value="male">Male
+            <input type="radio" name="gender" value="Female">Female
+            <input type="radio" name="gender" value="Other">Other</td>
+            <br><br>
+        </tr>
+        <tr>
+            <th>Mobile</th>
+            <td><input type="text"></td>
+            <br><br>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td><textarea name="" id="" cols="20" rows="5"></textarea>
+                <br><br></td>
+        </tr>
+        <tr>
+            <th><button type="submit">Submit</button></th>
+            <th><button type="reset">Reset</button></th>
+        </tr>
     </form>
+   </table>
 </fieldset>
 </body>
 </html>
