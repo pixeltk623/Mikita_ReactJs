@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        .header {
+            padding: 3px;
+            background-color: rgb(139, 139, 241);
+            color: white;
+        }
+        .content {
+            background: #f1f1f1;
+            margin-top: 2px;
+            padding: 40px;
+        }   
+        
+        .content .box-1{
+            background: greenyellow;
+            color: #f1f1f1;
+            float: left;
+            width: 63%;
+            height: 265px;
+            margin: 13px 0px 9px 6px;
+            padding: 10px;
+        }
+        .content .box-2 {
+            background: purple;
+            color: #f1f1f1;
+            float: right;
+            width: 35%;
+            height: 265px;
+            margin: 13px 7px 10px 0px;
+            padding: 10PX;
+        }   
+        .content .twin-box1 {
+            background-color: orange;
+            float: left;
+            width: 49%;
+            height: 240px;
+            color: #f1f1f1;
+            margin: 0px 24px 7px 9px;
+        }
+        .content .twin-box2 {
+            background-color: orange;
+            float: left;
+            width: 48%;
+            height: 240px;
+            color: #f1f1f1;
+            margin: 0px 0px 40px 0px;
+        }
+        .content:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        .footer {
+            background-color: rgb(139, 139, 241);
+            color: #f1f1f1;
+            padding: 3px;
+            margin-top: 2px;
+        }
+    </style>
+    <title>form</title>
+</head>
+<body>
+    <div class="header">
+        <h2>.header</h2>
+    </div>
+    <div class="content">
+            <div class="box-1">
+            <h2>.main-content</h2>
+            </div>
+        
+            <div class="box-2">
+            <h2>.sidebar</h2>
+        </div>
+    
+    <div class="twin-box1">
+            <h2>.twin</h2>
+    </div>
+    <div class="twin-box2">
+            <h2>.twin</h2>
+    </div>
+    </div>
+    <div class="footer">
+        <h2>.footer</h2>
+    </div>
+</body>
+</html>

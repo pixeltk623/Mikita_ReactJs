@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        .header {
+            background-color: rgb(231, 226, 226);
+            padding: 8px;
+            text-align: center;
+        }
+        .nav {
+            background-color: rgb(231, 226, 226);
+            padding: 8px;
+            margin-top: 20px;
+            text-align: center;            
+        }
+        a {
+            padding: 15px;
+            margin: 10px;
+        }
+        .row {
+            background-color: rgb(231, 226, 226);
+            padding: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .left-column {
+            background-color: rgb(231, 226, 226);
+            padding: 27px;
+            float: left;
+            margin: 21px 13px 0px 2px;
+            text-align: center;
+            width: 30%
+        }
+        .middle-column {
+            background-color: rgb(231, 226, 226);
+            padding: 27px;
+            float: left;
+            margin: 21px 0px 0px 10px;
+            text-align: center;
+            width: 30%
+        }
+        .right-column {
+            background-color: rgb(231, 226, 226);
+            padding: 28px;
+            float: left;
+            margin: 22px 21px 0px 34px;
+            text-align: center;
+            width: 30%
+        }
+        .footer {
+            padding: 10px;
+            text-align: center;
+            background: #ddd;
+            margin-top: 33px;
+        }
+        .main-content:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        @media screen and (max-width: 900px) {
+            .left-column .middle-column .right-column {   
+            width: 100%;
+            padding: 0;
+        }
+        }
+    </style>
+    <title>form</title>
+</head>
+<body>
+    <div class="header">
+        <h2>LOGO</h2>
+    </div>
+    <div class="nav">   
+        <a href="#">Home</a>
+        <a href="#">Products</a>
+        <a href="#">Service</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </div>
+        <div class="row">
+            <h3>Feature</h3>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="column">
+            <div class="left-column">
+               <h3>Column One</h3>
+            </div>
+        </div>    
+    <div class="column">
+        <div class="middle-column">
+            <h3>Column Two</h3>
+        </div>
+    </div>
+    <div class="column">
+        <div class="right-column">
+            <h3>Column Three</h3>
+        </div>
+    </div>
+    </div>
+    <div class="footer">
+        <h3>footer</h3>
+    </div>
+</body>
+</html>
