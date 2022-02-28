@@ -23,35 +23,38 @@
             padding: 15px;
             margin: 10px;
         }
-        .row {
+        .second-header {
             background-color: rgb(231, 226, 226);
             padding: 8px;
             margin-top: 20px;
             text-align: center;
         }
+        .column {
+            width: 33.33%;
+            float: left;
+        }
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
         .left-column {
             background-color: rgb(231, 226, 226);
             padding: 27px;
-            float: left;
-            margin: 21px 13px 0px 2px;
-            text-align: center;
-            width: 30%
+            margin: 1px;
         }
+      
         .middle-column {
             background-color: rgb(231, 226, 226);
             padding: 27px;
-            float: left;
-            margin: 21px 0px 0px 10px;
+            margin: 1px;
             text-align: center;
-            width: 30%
         }
         .right-column {
             background-color: rgb(231, 226, 226);
             padding: 28px;
-            float: left;
-            margin: 22px 21px 0px 34px;
+            margin: 1px;
             text-align: center;
-            width: 30%
         }
         .footer {
             padding: 10px;
@@ -59,16 +62,24 @@
             background: #ddd;
             margin-top: 33px;
         }
-        .main-content:after {
-            content: "";
-            display: table;
-            clear: both;
+        
+        @media screen and (min-width: 320px) and (max-width: 880px){
+            .column {   
+                width: 100%;
+            }
         }
-        @media screen and (max-width: 900px) {
-            .left-column .middle-column .right-column {   
-            width: 100%;
-            padding: 0;
+
+        button {
+            background-color: #0D6EFD;
+            color: white;
+            padding: 10px 20px;
+            font-size: 20px;
+            border: none;
+            border-radius: 7px;
         }
+
+        button:hover {
+            background-color: blue;
         }
     </style>
     <title>form</title>
@@ -77,6 +88,7 @@
     <div class="header">
         <h2>LOGO</h2>
     </div>
+
     <div class="nav">   
         <a href="#">Home</a>
         <a href="#">Products</a>
@@ -84,26 +96,31 @@
         <a href="#">About</a>
         <a href="#">Contact</a>
     </div>
-        <div class="row">
+
+    <div class="main-content">        
+        <div class="second-header">
             <h3>Feature</h3>
-        </div>
-    </div>
-    <div class="main-content">
-        <div class="column">
-            <div class="left-column">
-               <h3>Column One</h3>
-            </div>
+            <button>Primary</button>
+            <button type="button" class="btn btn-primary">Primary</button>
+
         </div>    
-    <div class="column">
-        <div class="middle-column">
-            <h3>Column Two</h3>
+        <div class="row">
+            <div class="column">
+                <div class="left-column">
+                   <h3>Column One</h3>
+                </div>
+            </div>    
+            <div class="column">
+                <div class="middle-column">
+                    <h3>Column Two</h3>
+                </div>
+            </div>
+            <div class="column">
+                <div class="right-column">
+                    <h3>Column Three</h3>
+                </div>
+            </div>            
         </div>
-    </div>
-    <div class="column">
-        <div class="right-column">
-            <h3>Column Three</h3>
-        </div>
-    </div>
     </div>
     <div class="footer">
         <h3>footer</h3>
