@@ -168,11 +168,97 @@
 
 
  		// 1. Prime No 
- 		// 2. Reverse No => 123 => 321
+ 		// 2. Reverse No => 123 => 321 // reverse = reverse * 10 + remainder
  		// 3. count of digits => 555482 =>6
  		// 4. sum of digits => 654654 => 6+5+4+6+5+4 = 56;
 
-			
+ 		// 123 
+
+ 		// => 321
+
+ 		let x = 123;
+ 		let reverse = 0; //3
+ 		while(x!=0) {
+ 			let remainder = x%10; // 2
+ 			reverse = reverse * 10 + remainder; // 0+3 = 3 //32
+ 			x = parseInt(x/10);
+ 		}
+
+ 		console.log(reverse);
+
+ 		//6 => 1, 2. 3 .6
+
+		//console.log(count);
+
+ 		/*var x = 7;
+ 		var count = 0;
+ 	
+ 		for(var i=1; i<=x; i++) {
+ 			console.log(x, i, x%i);
+
+ 			if(x%i==0) {
+ 				count++;
+ 			}
+		}	
+
+		if(count==2) {
+			console.log(x, " is Prime Number");
+		} else {
+			console.log(x, " is Not Prime Number");
+		}*/
+
+/*		while(false) {
+			console.log("Hello");	
+		}*/
+
+		/*var i = 1;
+
+		while(i<=10) {
+
+			console.log(i);
+
+			i++;
+		}*/
+
+		/*var i = 1;
+		do {
+			console.log(i);
+			i++
+		} while(i<=1);*/
+
+		// I/P => 1 2 3 4 5 6 7 8 9 10
+
+		// 1 2 3 5 8 9 10
+
+		// 1 2 3 4
+
+/*		for(var i = 1; i<=10; i++) {
+
+			//console.log(i);
+
+			if(i==4 || i==6 || i==7) {
+				continue;
+			}
+
+			console.log(i);
+
+		}
+		*/
+
+		// var i = 1;
+
+		// while(i<=10) {
+		// 	// console.log(i);
+		// 	i++;
+
+		// 	if(i==6 || i == 8 || i == 10) {
+		// 		continue;
+		// 	}
+
+		// 	console.log(i);
+		// }
+
 	</script>
+ 		
 </body>
 </html>
