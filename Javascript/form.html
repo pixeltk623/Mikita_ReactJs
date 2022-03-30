@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+
+	<form method="post">
+		<div>
+			<label>Name</label>
+			<input type="text" name="name" id="name">
+			<span id="e1"></span>
+		</div>
+
+		<div>
+			<label>Email</label>
+			<input type="text" name="email" id="email">
+			<span id="e2"></span>
+		</div>
+
+		<div>
+			<input type="submit" name="submit" onclick="return inputValidation();">
+		</div>
+
+	</form>
+
+	<script type="text/javascript">
+
+/*		# Email != ''
+		# Email length = 4 not valid
+		# Specific message for each cond*/
+			
+		function inputValidation() {
+
+			let nameOfUser = document.getElementById('name').value;
+			let email = document.getElementById('email').value;
+
+
+			/*nameOfUser.length*/
+
+			if (nameOfUser=='') {
+				document.getElementById('e1').innerHTML = "Name Can not be blank";
+				document.getElementById('e1').style.color = "red";
+				document.getElementById('e1').style.fontSize = "20px";
+				//console.log("Name Can not be blank");
+			} else {
+				document.getElementById('e1').innerHTML = "";
+				//console.log("Name Can not be blank");
+			}
+
+			if (email=='') {
+				document.getElementById('e2').innerHTML = "Email Can not be blank";
+				document.getElementById('e2').style.color = "red";
+				document.getElementById('e2').style.fontSize = "20px";
+				//console.log("Name Can not be blank");
+			} else {
+
+				if(email.length>4) {
+					document.getElementById('e2').innerHTML = "";
+				} else {
+					document.getElementById('e2').innerHTML = "Minimum 4 Char is Required";
+				}
+
+				
+				//console.log("Name Can not be blank");
+			}
+
+
+			return false;
+		}
+
+	</script>
+</body>
+</html>
