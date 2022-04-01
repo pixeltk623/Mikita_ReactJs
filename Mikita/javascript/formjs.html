@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Javascript</title>
+</head>
+<body>
+    <form method="post">
+        <table>
+            <tr>
+                <th>Name</th>
+                <td><input type="namw" name="name" id="name"></td>  
+                <td><span id="n1"></span></td> 
+            </tr>
+                
+            <tr>
+                <th>Email</th>      
+                <td><input type="email" name="email" id="email"></td>
+                <td><span id="n2"></span></td>
+            </tr>
+               
+            <tr>
+                <th>Mobile Number</th>
+                <td><input type="number" name="number" id="number"></td>
+                <td><span id="n3"></span></td>
+            </tr>
+               
+            <tr>
+                <th> Gender</th>
+                <td><input type="radio" name="gender" value="Male">Male</td>
+                <td><input type="radio" name="gender" value="Female">Female</td>
+                <td><span id="n4"></span></td>
+            </tr>
+                
+            <tr>
+                <th>Hobbies</th>
+                <td><input type="checkbox" name="hobbies" value="Dancing">Dancing</td>
+                <td><input type="checkbox" name="hobbies" value="Reading Books">Reading Books</td>
+                <td><input type="checkbox" name="hobbyies" id="hobbies">Swimming</td>
+                <td><input type="checkbox" name="hobbyies" id="hobbies">Painting</td>
+                <td><span id="n5"></span></td>
+            </tr>
+
+            <tr>
+                <th>city</th>
+                <td>
+                    <select name="city">
+                        <option value="vadodara">Vadodara</option>
+                        <option value="bharuch">Bharuch</option>
+                        <option value="anand">Anand</option>
+                    </select>
+                    <th><span id="n6"></span></th>
+                </td>
+            </tr>
+
+            <tr>
+                <th><button type="submit" onclick="return itemValidation();">submit</button></th>
+            </tr>
+        </form>
+        </table>
+        <script type="text/javascript">
+
+            function itemValidation () {
+                let nameOfUser = document.getElementById('name').value;
+                let email = document.getElementById('email').value;
+                let mobileNumber = document.getElementById('number').value;
+                let Gender = document.getElementById('gender').value;
+                let Hobbies = document.getElementById('hobbies').value;
+                let City = document.getElementById('city').value;
+
+                if (nameOfUser=='') {
+                    document.getElementById('n1').innerHTML = "Name Can Not Be Blank";
+                    document.getElementById('n1').style.color = "red";
+                }else {
+				document.getElementById('n1').innerHTML = "";
+                }
+
+                if (email=='') {
+				document.getElementById('n2').innerHTML = "Email Can not be blank";
+				document.getElementById('n2').style.color = "red";
+				
+			    } else {
+                document.getElementById('n2').innerHTML = "";
+                }
+
+                if(mobileNumber=='') {
+					document.getElementById('n3').innerHTML = "Number is required";
+                    document.getElementById('n3').style.color = "red";
+				} else {
+					document.getElementById('n3').innerHTML = "Number is required";
+				}
+
+                if(gender < 1) {
+					document.getElementById('n4').innerHTML = "Only Select One ";
+                    document.getElementById('n4').style.color = "red";
+				} else {
+					document.getElementById('n4').innerHTML = "";
+				}
+
+                if(hobbies > 2) {
+					document.getElementById('n5').innerHTML = "Select More Then Two Hobbies Required" ;
+                    document.getElementById('n5').style.color = "red";
+				} else {
+					document.getElementById('n5').innerHTML = "";
+				}
+
+                if(city=='') {
+					document.getElementById('n6').innerHTML = "selection required" ;
+                    document.getElementById('n6').style.color = "red";
+				} else {
+					document.getElementById('n6').innerHTML = "";
+				}
+
+                return false;
+    		    }
+
+
+
+        </script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post">
+
+        <div>
+            <label>Email</label>
+            <input type="text" name="Email" id="Email">
+            <span id="mail"></span>
+        </div>
+
+        <div>
+            <input type="submit" name="submit" onclick="return emailValidation()">
+        </div>
+    </form>
+
+    <script type="text/javascript">
+        function emailValidation() {
+            let emailUser=document.getElementById('Email').value;
+        
+
+            if (emailUser== ''){
+                document.getElementById('mail').innerHTML= "email not to be blank";
+                document.getElementById('mail').style.color = "red";
+            }else {
+                if (emailUser.length < 4){
+                    document.getElementById('mail').innerHTML = "email should be grater then 4";
+                    document.getElementById('mail').style.color = "red";
+                } else {
+                    document.getElementById('mail').innerHTML = "";
+                }
+                
+
+            }
+            return false;
+        }
+        
+    </script>
+</body>
+</html>

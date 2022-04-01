@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+</head>
+<body>
+    <form method="post">
+        <div>
+			<label>Name</label>
+			<input type="text" name="name" id="name">
+			<span id="n1"></span>
+		</div>
+
+		<div>
+			<label>Email</label>
+			<input type="text" name="email" id="email">
+			<span id="n2"></span>
+		</div>
+
+        <div>
+            <label>Mobile Number</label>
+            <input type="mobilenumber" name="number" id="number">
+            <span id="n3"></span>
+        </div>
+
+        <div>
+            <label>Gender</label>
+            <input type="radio" name="gender" id="gender">Male
+            <input type="radio" name="gender" id="gender">Female
+            <span id="n4"></span>
+        </div>
+
+        <div>
+            <label>Hobbies</label>
+            <input type="checkbox" name="hobbyies" id="hobbies">Dancing
+            <input type="checkbox" name="hobbyies" id="hobbies">Reading Books
+            <input type="checkbox" name="hobbyies" id="hobbies">Swimming
+            <input type="checkbox" name="hobbyies" id="hobbies">Painting
+            <span id="n5"></span>
+        </div>
+
+        <div>
+            <label>City</label>
+            <select name="city">
+                <option value="vadodara">Vadodara</option>
+                <option value="bharuch">Bharuch</option>
+                <option value="anand">Anand</option>
+            </select>
+            <span id="n6"></span>
+        </div>
+
+        <div>
+            <button type="submit" onclick="return itemValidation();">submit</button>
+        </div>
+    </form>
+    <script type="text/javascript">
+        function itemValidation () {
+                let nameOfUser = document.getElementById('name').value;
+                let email = document.getElementById('email').value;
+                let mobileNumber = document.getElementById('number').value;
+                let gender = document.getElementById('gender').value;
+                let hobbies = []
+                let checkboxes = document.getElementsByName("hobbies[]");
+                    for(var i=0; i < checkboxes.length; i++) {
+                      if(checkboxes[i].checked) {
+                      hobbies.push(checkboxes[i].value);
+                    }
+                        }
+                let city = document.getElementById('city').value;
+            
+                if (nameOfUser=='') {
+                    document.getElementById('n1').innerHTML = "Name Can Not Be Blank";
+                    document.getElementById('n1').style.color = "red";
+                }else {
+				document.getElementById('n1').innerHTML = "";
+                }
+
+                if (email=='') {
+				document.getElementById('n2').innerHTML = "Email Can not be blank";
+				document.getElementById('n2').style.color = "red";
+				
+			    } else {
+                document.getElementById('n2').innerHTML = "";
+                }
+
+                if(mobileNumber=='') {
+					document.getElementById('n3').innerHTML = "Number is required";
+                    document.getElementById('n3').style.color = "red";
+				} else {
+					document.getElementById('n3').innerHTML = "Number is required";
+				}
+
+                if (gender== ''){
+                document.getElementById('mail').innerHTML= "email not to be blank";
+                document.getElementById('mail').style.color = "red";
+                }else {
+                if(gender < 1) {
+					document.getElementById('n4').innerHTML = " ";
+                    document.getElementById('n4').style.color = "red";
+				} else {
+					document.getElementById('n4').innerHTML = "Only Select One";
+				}
+
+                if(hobbies > 2) {
+					document.getElementById('n5').innerHTML = "Select More Then Two Hobbies Required" ;
+                    document.getElementById('n5').style.color = "red";
+				} else {
+					document.getElementById('n5').innerHTML = "";
+				}
+
+                if(city=='select') {
+					document.getElementById('n6').innerHTML = "plase select your city" ;
+                    document.getElementById('n6').style.color = "red";
+				} else {
+					document.getElementById('n6').innerHTML = "";
+				}
+
+                return false;
+    		    }
+        
+
+    </script>
+
+</body>
+</html>
