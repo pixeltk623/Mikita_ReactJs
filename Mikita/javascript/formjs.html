@@ -66,9 +66,7 @@
                 let nameOfUser = document.getElementById('name').value;
                 let email = document.getElementById('email').value;
                 let mobileNumber = document.getElementById('number').value;
-                let Gender = document.getElementById('gender').value;
-                let Hobbies = document.getElementById('hobbies').value;
-                let City = document.getElementById('city').value;
+                let gender = document.getElementById('gender').value;
 
                 if (nameOfUser=='') {
                     document.getElementById('n1').innerHTML = "Name Can Not Be Blank";
@@ -84,7 +82,6 @@
 			    } else {
                 document.getElementById('n2').innerHTML = "";
                 }
-
                 if(mobileNumber=='') {
 					document.getElementById('n3').innerHTML = "Number is required";
                     document.getElementById('n3').style.color = "red";
@@ -92,27 +89,17 @@
 					document.getElementById('n3').innerHTML = "Number is required";
 				}
 
+                if (gender== ''){
+                document.getElementById('mail').innerHTML= "email not to be blank";
+                document.getElementById('mail').style.color = "red";
+                }else {
                 if(gender < 1) {
-					document.getElementById('n4').innerHTML = "Only Select One ";
+					document.getElementById('n4').innerHTML = " ";
                     document.getElementById('n4').style.color = "red";
 				} else {
-					document.getElementById('n4').innerHTML = "";
+					document.getElementById('n4').innerHTML = "Only Select One";
 				}
-
-                if(hobbies > 2) {
-					document.getElementById('n5').innerHTML = "Select More Then Two Hobbies Required" ;
-                    document.getElementById('n5').style.color = "red";
-				} else {
-					document.getElementById('n5').innerHTML = "";
-				}
-
-                if(city=='') {
-					document.getElementById('n6').innerHTML = "selection required" ;
-                    document.getElementById('n6').style.color = "red";
-				} else {
-					document.getElementById('n6').innerHTML = "";
-				}
-
+            
                 return false;
     		    }
 
