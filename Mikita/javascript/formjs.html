@@ -66,7 +66,7 @@
                 let nameOfUser = document.getElementById('name').value;
                 let email = document.getElementById('email').value;
                 let mobileNumber = document.getElementById('number').value;
-                let gender = document.getElementById('gender').value;
+                //let gender = document.getElementById('gender').value;
 
                 if (nameOfUser=='') {
                     document.getElementById('n1').innerHTML = "Name Can Not Be Blank";
@@ -89,16 +89,16 @@
 					document.getElementById('n3').innerHTML = "Number is required";
 				}
 
-                if (gender== ''){
-                document.getElementById('mail').innerHTML= "email not to be blank";
-                document.getElementById('mail').style.color = "red";
-                }else {
-                if(gender < 1) {
-					document.getElementById('n4').innerHTML = " ";
-                    document.getElementById('n4').style.color = "red";
-				} else {
-					document.getElementById('n4').innerHTML = "Only Select One";
-				}
+    //             if (gender== ''){
+    //             document.getElementById('mail').innerHTML= "email not to be blank";
+    //             document.getElementById('mail').style.color = "red";
+    //             }else {
+    //             if(gender < 1) {
+				// 	document.getElementById('n4').innerHTML = " ";
+    //                 document.getElementById('n4').style.color = "red";
+				// } else {
+				// 	document.getElementById('n4').innerHTML = "Only Select One";
+				// }
             
                 return false;
     		    }

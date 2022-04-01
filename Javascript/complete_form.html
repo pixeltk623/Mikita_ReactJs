@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <style type="text/css">
+        table tr th,td {
+            padding: 10px;
+        }
+        table {
+            margin: auto;
+            margin-top: 52px;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+
+        <table border="1" width="800" style="border-collapse: collapse;">
+            <tr>
+                <th>
+                    <label>Name</label>
+                </th>
+                <td>
+                    <input type="text" name="name" id="name">
+                    <span id="n1"></span>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label>Email</label>
+                </th>
+
+                <td>
+                    <input type="text" name="email" id="email">
+                    <span id="n2"></span>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label>Mobile Number</label>
+                </th>
+                <td>
+                    <input type="text" name="mobile_number" id="mobile_number">
+                    <span id="n3"></span>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label>Gender</label>
+                </th>
+                <td>
+                    <input type="radio" name="gender" value="Male">Male
+                    <input type="radio" name="gender" value="Female">Female
+                    <input type="radio" name="gender" value="Others">Others
+                    <span id="n4"></span>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label>Hobbies</label>
+                </th>
+                <td>
+                    <input type="checkbox" name="hobbies" value="Dancing">Dancing
+                    <input type="checkbox" name="hobbies" value="Reading Books">Reading Books
+                    <input type="checkbox" name="hobbies" value="Swimming">Swimming
+                    <input type="checkbox" name="hobbies" value="Painting">Painting
+                    <span id="n5"></span>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label>City</label>
+                </th>
+                <td>
+                     <select name="city" id="city">
+                        <option value="">Select</option>
+                        <option value="vadodara">Vadodara</option>
+                        <option value="bharuch">Bharuch</option>
+                        <option value="anand">Anand</option>
+                    </select>
+                    <span id="n6"></span>
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    <button type="submit" name="submit" onclick="return itemValidation(event);">Submit</button>
+                </th>
+            </tr>
+        </table>
+    </form>
+
+    <script type="text/javascript">
+
+        function itemValidation(event) {
+
+            event.preventDefault();
+
+            // console.log(event);
+
+            var nameOfUser = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var mobileNo = document.getElementById('mobile_number').value;
+            var city = document.getElementById('city').value;
+            var gender = document.getElementsByName('gender');
+
+            var genderValue = '';
+            var hobbyValue = [];
+
+            for(var i = 0; i<gender.length; i++) {
+                //
+                if(gender[i].checked) {
+                    genderValue = gender[i].value;                    
+                }
+            }
+
+            var hobby = document.getElementsByName('hobbies');
+
+            for(var i = 0; i<hobby.length; i++) {
+
+                if(hobby[i].checked) {
+                    hobbyValue.push(hobby[i].value);
+                }
+
+            }
+
+            //console.log(hobbyValue);
+
+            var error1 = document.getElementById('n1');
+            var error2 = document.getElementById('n2');
+            var error3 = document.getElementById('n3');
+            var error4 = document.getElementById('n4');
+            var error5 = document.getElementById('n5');
+            var error6 = document.getElementById('n6');
+            var emailRegix = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+            const regexExpMobile = /^[6-9]\d{9}$/gi;
+
+
+            //console.log(emailRegix.test(email));
+
+            if (nameOfUser=='') {
+                error1.innerHTML = 'Name is Required';
+                error1.style.color = 'red';
+            } else {
+                if(nameOfUser.length<3) {
+                    error1.innerHTML = 'Minimum 3 Letters is Required';
+                    error1.style.color = 'red';
+                } else {
+                    error1.innerHTML = '';
+                }
+            }
+
+            if (email=='') {
+                error2.innerHTML = 'Email is Required';
+                error2.style.color = 'red';
+            } else {
+                if (email.length<7) {
+                    error2.innerHTML = 'Minimum 7 Letters is Required';
+                    error2.style.color = 'red';
+                } else {
+                    if(!emailRegix.test(email)) {
+                        error2.innerHTML = 'Email Address is Not Valid';
+                        error2.style.color = 'red';
+                    } else {
+                        error2.innerHTML = '';
+                    }
+                }
+            }
+
+            if(mobileNo=='') {
+                error3.innerHTML = 'Mobile No is Required';
+                error3.style.color = 'red';
+            } else {
+                if(!regexExpMobile.test(mobileNo)) {
+                    error3.innerHTML = 'Mobile No is Not Valid';
+                    error3.style.color = 'red';
+                } else {
+                    error3.innerHTML = '';
+                }
+            }
+
+            if(city=='') {
+                error6.innerHTML = 'City is Not Selected';
+                error6.style.color = 'red';
+            } else {
+                error6.innerHTML = '';
+            }
+
+            if(genderValue=='') {
+                error4.innerHTML = 'Gender is Not Selected';
+                error4.style.color = 'red';
+            } else {
+                error4.innerHTML = '';
+            }
+
+            if (hobbyValue.length==0) {
+                error5.innerHTML = 'Hobby is Not Selected';
+                error5.style.color = 'red';
+            } else if(hobbyValue.length==1) {
+                error5.innerHTML = 'Minimum 2 Hobby is Required';
+                error5.style.color = 'red';
+            } else {
+               error5.innerHTML = '';
+            }
+
+            /*return true;*/   
+        }
+    </script>
+</body>
+</html>
