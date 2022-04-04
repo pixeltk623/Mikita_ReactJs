@@ -16,8 +16,7 @@
     </style>
 </head>
 <body>
-    <form method="post" enctype="multipart/form-data">
-
+    <form method="post" enctype="multipart/form-data" id="myForm">
         <table border="1" width="800" style="border-collapse: collapse;">
             <tr>
                 <th>
@@ -92,6 +91,10 @@
         </table>
     </form>
 
+    <div id="result">
+        
+    </div>
+
     <script type="text/javascript">
 
         function itemValidation(event) {
@@ -138,6 +141,8 @@
             const regexExpMobile = /^[6-9]\d{9}$/gi;
 
 
+            var isStatus = false;
+
             //console.log(emailRegix.test(email));
 
             if (nameOfUser=='') {
@@ -172,12 +177,16 @@
             if(mobileNo=='') {
                 error3.innerHTML = 'Mobile No is Required';
                 error3.style.color = 'red';
+
+                isStatus = false;
             } else {
                 if(!regexExpMobile.test(mobileNo)) {
                     error3.innerHTML = 'Mobile No is Not Valid';
                     error3.style.color = 'red';
+                    isStatus = false;
                 } else {
                     error3.innerHTML = '';
+                    isStatus = true;
                 }
             }
 
@@ -205,7 +214,43 @@
                error5.innerHTML = '';
             }
 
-            /*return true;*/   
+
+            if(nameOfUser!='' && (email!='' && email.length>=7 && emailRegix.test(email)) && genderValue!='' && hobbyValue.length>=2 && city!='' && isStatus) {
+
+                //console.log('Form validated');
+
+                document.getElementById('myForm').reset();
+
+                let html = '';
+
+                html += '<table border="1" width="800" style="border-collapse: collapse;">\
+                <tr>\
+                    <th>Name</th>\
+                    <td>'+nameOfUser+'</td>\
+                </tr>\
+                <tr>\
+                    <th>Email</th>\
+                    <td>'+email+'</td>\
+                </tr>\
+                <tr>\
+                    <th>Mobile No</th>\
+                    <td>'+mobileNo+'</td>\
+                </tr>\
+                <tr>\
+                    <th>Gender</th>\
+                    <td>'+genderValue+'</td>\
+                </tr>\
+                <tr>\
+                    <th>Hobby</th>\
+                    <td>'+hobbyValue+'</td>\
+                </tr>\
+                <tr>\
+                    <th>City</th>\
+                    <td>'+city+'</td>\
+                </tr>\
+            </table>';
+            document.getElementById('result').innerHTML = html;
+            }   
         }
     </script>
 </body>

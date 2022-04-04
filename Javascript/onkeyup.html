@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+
+	<form method="post">
+		<label>Password</label>
+		<input type="password" name="password" id="password" onkeyup="getPassword();">
+		<br><br>
+		<button type="button" onclick="passwordShowAndHide();">Show/Hide</button>
+
+		<div>
+			<span id="e1">One lowercase character</span>
+			<br><br>
+			<span id="e2">One special character</span>
+			<br><br>
+			<span id="e3">One uppercase character</span>
+			<br><br>
+			<span id="e4">8 characters minimum</span>
+			<br><br>
+			<span id="e5">One number</span>
+			<br><br>
+		</div>
+
+		<input type="submit" name="submit">
+	</form>
+
+	<script type="text/javascript">
+		function getPassword() {
+
+			let regixSpecial = /[\!\@\#\$\%\^\&\*\)\(\+\=\.\<\>\{\}\[\]\:\;\'\"\|\~\`\_\-]/g;
+
+			let password = document.getElementById('password').value;
+
+			if(password.length<8) {
+				document.getElementById('e4').style.color = "red";
+			} else {
+				document.getElementById('e4').style.color = "green";
+			}
+
+			if(/[0-9]/.test(password)) {
+				document.getElementById('e5').style.color = "green";
+			} else {
+				document.getElementById('e5').style.color = "red";
+			}
+
+			if(/[A-Z]/.test(password)) {
+				document.getElementById('e3').style.color = "green";
+			} else {
+				document.getElementById('e3').style.color = "red";
+			}
+
+			if(/[a-z]/.test(password)) {
+				document.getElementById('e1').style.color = "green";
+			} else {
+				document.getElementById('e1').style.color = "red";
+			}
+
+			if (regixSpecial.test(password)) {
+				document.getElementById('e2').style.color = "green";
+			} else {
+				document.getElementById('e2').style.color = "red";
+			}
+
+
+			//console.log(regixSpecial.test(password));
+		}
+
+		function passwordShowAndHide() {
+			let passwordInput = document.getElementById('password').getAttribute('type');
+
+			//console.log(passwordInput);
+
+			if(passwordInput=='password') {
+				document.getElementById('password').setAttribute('type','text');
+			} else {
+				document.getElementById('password').setAttribute('type','password');
+			}
+
+		}
+	</script>
+</body>
+</html>
