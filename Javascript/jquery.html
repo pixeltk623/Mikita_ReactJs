@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		
+	.caps_status {
+	    position: absolute;
+	    top: 50%;
+	    left: 40%;
+	    background-color: #272727;
+	    color: white;
+	    padding: 31px;
+	    font-family: monospace;
+	    font-size: 25px;
+	    border-radius: 98px;
+	}
+	</style>
+</head>
+<body>
+	<form method="post">
+		<label>Name: </label>
+		<input type="text" name="name" onkeyup="checkKeyboardStatus();">
+
+		<label>Email: </label>
+		<input type="email" name="email">
+	</form>
+
+	<div class="caps_status" id="caps_status">
+		Caps Lock is <span id="current_status"></span>
+	</div>
+
+	<script type="text/javascript">	
+
+	let capsStatus = document.getElementById("caps_status");
+
+	//capsStatus.style.display = "none";
+
+
+	setTimeout(() => {
+  		const box = document.getElementById('caps_status');
+  		
+  		capsStatus.style.display = "none";
+
+	}, 4000); 
+
+	function checkKeyboardStatus() {
+		console.log(event.getModifierState('CapsLock'));
+		capsStatus.style.display = 'block';
+		if(event.getModifierState('CapsLock')==true) {
+			document.getElementById('current_status').innerHTML = 'ON';
+		} else {
+			document.getElementById('current_status').innerHTML = 'OFF';
+		}
+	}
+
+	</script>
+</body>
+</html>
