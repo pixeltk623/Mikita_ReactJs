@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" style="text-align: center; border: 3px solid black;">
+
+        <label>Password</label>
+        <input type="password" name="password" id="password" onkeyup="getPassword();">
+        <br><br>
+        <button type="button" onclick="showAndHide();">Show/Hide</button>
+
+        <div>
+			<span id="e1">One lowercase character</span>
+			<br><br>
+			<span id="e2">One special character</span>
+			<br><br>
+			<span id="e3">One uppercase character</span>
+			<br><br>
+			<span id="e4">8 characters minimum</span>
+			<br><br>
+			<span id="e5">One number</span>
+			<br><br>
+		</div>
+
+		<input type="submit" name="submit">
+    </form>
+    <script type="text/javascript">
+        function getPassword() {
+            let regixSpecial = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+
+            let password = document.getElementById('password').value;
+
+            if(password.length<8) {
+				document.getElementById('e4').style.color = "red";
+			} else {
+				document.getElementById('e4').style.color = "green";
+			}
+            
+            if (!/[0-9]/.test(password)) {
+                document.getElementById('e5').style.color = "red";
+            } else {
+                document.getElementById('e5').style.color = "green";
+            }
+            if (!/[a-z]/.test(password)){
+                document.getElementById('e1').style.color = "red";
+            } else {
+                document.getElementById('e1').style.color = "green";
+            }
+            if (!/[A-Z]/.test(password)) {
+                document.getElementById('e3').style.color = "red";
+            } else {
+                document.getElementById('e3').style.color = "green";
+            }
+            // if (RegExp.test(password)) {
+            //     document.getElementById('e2').style.color = "red";
+            // } else {
+            //     document.getElementById('e2').style.color = "green";
+            // }
+            if (!/[@#$%^&*]/.test(password)){
+                document.getElementById('e2').style.color = "red";
+            } else {
+                document.getElementById('e2').style.color = "green";
+            }
+        }
+
+        function showAndHide() {
+			let passwordInput = document.getElementById('password').getAttribute('type');
+
+			if(passwordInput=='password') {
+				document.getElementById('password').setAttribute('type','text');
+			} else {
+				document.getElementById('password').setAttribute('type','password');
+			}
+
+		}
+    </script>
+</body>
+</html>
