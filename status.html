@@ -25,13 +25,34 @@
 		<input type="text" name="name" onkeyup="checkKeyboardStatus();">
 
 		<label>Email: </label>
-		<input type="email" name="email">
+		<input type="email" name="email" onkeyup="hello();">
 	</form>
 
 	<div class="NumLock_status" id="NumLock_status">
 		Num Lock is <span id="current_status"></span>
 	</div>
     <script type="text/javascript">	
+
+        window.addEventListener( 'keydown', function( event ) {
+
+            if (event.getModifierState("CapsLock")) {
+                document.getElementById('current_status').innerHTML = 'ON';    
+            } else {
+                document.getElementById('current_status').innerHTML = 'OFF';       
+            }
+
+          //console.log( 'CapsLock', event.getModifierState("CapsLock") );
+        
+        });
+
+
+        function hello() {
+            
+            console.log(event.getModifierState('CapsLock'));
+        }
+
+
+        
 
         let NumLock = document.getElementById("NumLock_status");
         // console.log(NumLock);
