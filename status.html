@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        .NumLock_status {
+            position: absolute;
+            top: 50%;
+            left: 40%;
+            background-color: #7a8ddf;
+            color: white;
+            padding: 31px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 25px;
+            border-radius: 98px;
+            }
+    </style>
+</head>
+<body>
+    <form method="post" style="text-align: center;">
+		<label>Name: </label>
+		<input type="text" name="name" onkeyup="checkKeyboardStatus();">
+
+		<label>Email: </label>
+		<input type="email" name="email">
+	</form>
+
+	<div class="NumLock_status" id="NumLock_status">
+		Num Lock is <span id="current_status"></span>
+	</div>
+    <script type="text/javascript">	
+
+        let NumLock = document.getElementById("NumLock_status");
+        // console.log(NumLock);
+
+
+        // setTimeout(() => {
+  		// const box = document.getElementById('NumLock_status');
+  		
+  		// NumLock.style.display = "none";
+
+	    // }, 5000); 
+
+
+        function checkKeyboardStatus() {
+		console.log(event.getModifierState('NumLock'));
+		NumLock.style.display = 'block';
+		if(event.getModifierState('NumLock')==true) {
+			document.getElementById('current_status').innerHTML = 'ON';
+		} else {
+			document.getElementById('current_status').innerHTML = 'OFF';
+		}
+	}
+    </script>
+
+</body>
+</html>
