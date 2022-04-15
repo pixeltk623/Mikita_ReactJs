@@ -11,10 +11,12 @@
         var url = "https://jsonplaceholder.typicode.com/users";
 
         var httpReq = new XMLHttpRequest();
+
         httpReq.open( "GET", url, false );
         httpReq.send( null );
     
         var finalData = JSON.parse(httpReq.responseText);
+
         var html = '';
         </script>
 </body>

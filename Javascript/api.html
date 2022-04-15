@@ -1,0 +1,197 @@
+<!-- http://localhost/growweb/api/v1/category -->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		table {
+			margin: auto;
+		}
+		table tr th,td {
+			padding: 10px;
+		}
+
+		.col-6 {
+			width: 50%;
+			float: left;
+		}
+
+		h1 {
+			text-align: center;
+		}
+
+		input[type=text],select {
+			height: 30px;
+			width: -webkit-fill-available;
+		}
+
+		textarea {
+			width: -webkit-fill-available;
+			height: 80px;
+		}
+
+		.edit {
+			background-color: lightblue;
+			margin-right: 5px;
+		}
+
+		.delete {
+			background-color: red;
+		}
+
+		.send {
+			background-color: blue;
+		}
+
+		button {
+			padding: 10px 20px;
+			color: white;
+			border: none;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="container">
+		<h1>CRUD Operations In Javascript</h1>
+		<div class="row">
+			<div class="col-6">
+				<div id="form">
+					<form method="POST">
+						<table border="1" style="border-collapse:collapse; width: 90%;">
+							<tr>
+								<th>Name</th>
+								<td>
+									<select name="userId" id="userId">
+										<option value="">Select</option>
+										<option value="1">Sharvan Kumar</option>
+									</select>
+									<span id="e1"></span>
+								</td>
+							</tr>
+
+							<tr>
+								<th>Title</th>
+								<td>
+									<input type="text" name="title" id="title">
+									<span id="e2"></span>
+								</td>
+							</tr>
+
+							<tr>
+								<th>Body</th>
+								<td>
+									<textarea name="body" id="body"></textarea>
+									<span id="e3"></span>
+								</td>
+							</tr>
+
+							<tr>
+								<th colspan="2">
+									<button type="submit" name="submit" class="send" onclick="return submitData();">Submit</button>
+								</th>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+			<div class="col-6">
+				<div id="result"></div>		
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var url = "https://jsonplaceholder.typicode.com/users";
+		getAllData();
+		function getAllData() {
+			var httpReq = new XMLHttpRequest();
+			httpReq.open( "GET", url, false ); // false for synchronous request
+		    httpReq.send( null );
+		    var finalData = JSON.parse(httpReq.responseText);
+		    var html = '';
+		    html += '<table border="1" style="border-collapse:collapse; width: 80%;">';
+			    html += '<tr>';
+			    	html += '<th>Sr.No</th>';
+			    	html += '<th>Name</th>';
+			    	html += '<th>Email</th>';
+			    	html += '<th>Action</th>';
+			    html += '</tr>';
+		    for(var i = 0; i<finalData.length; i++) {
+		    	html += '<tr>';
+		    		html += '<td>'+(i+1)+'</td>';
+			    	html += '<td>'+finalData[i].name+'</td>';
+			    	html += '<td>'+finalData[i].email+'</td>';
+			    	html += '<th style="display: inline-flex;"><button type="button" class="edit">Edit</button> <button type="button" class="delete" onclick="deleteData()">Delete</button></th>';
+			    html += '</tr>';
+		    }
+		    html += '</table>';
+		    document.getElementById('result').innerHTML = html;
+		}
+
+	    function submitData() {
+	    	var e1 		= 	document.getElementById('e1');
+	    	var e2 		= 	document.getElementById('e2');
+	    	var e3 		= 	document.getElementById('e3');
+	    	var userId 	= 	document.getElementById('userId').value;
+	    	var title 	= 	document.getElementById('title').value;
+	    	var body 	= 	document.getElementById('body').value;
+
+	    	//console.log(userId, title, body)
+
+	    	if(userId=='') {
+	    		e1.innerHTML = 'Name can not be blank';
+	    		e1.style.color = 'red';
+	    	} else {
+	    		e1.innerHTML = '';
+	    	}
+
+	    	if(title=='') {
+	    		e2.innerHTML = 'Title can not be blank';
+	    		e2.style.color = 'red';
+	    	} else {
+	    		e2.innerHTML = '';
+	    	}
+
+	    	if(body=='') {
+	    		e3.innerHTML = 'Body can not be blank';
+	    		e3.style.color = 'red';
+	    	} else {
+	    		e3.innerHTML = '';
+	    	}
+
+	    	if((userId && title && body)!=='') {
+	    		
+	    		let formData = {userId: userId, title: title, body: body};
+
+	    		let myJSONData = JSON.stringify(formData);
+
+
+	    		var httpReq = new XMLHttpRequest();
+				httpReq.open( "POST", url, true ); // false for synchronous request
+			    httpReq.send( myJSONData );
+
+			    getAllData();
+
+	    	}
+
+	    	return false;
+	    }
+
+	    function deleteData() {
+	    	console.log('Hello');
+	    	getAllData();
+	    }
+
+	    function editData() {
+	    	getAllData();
+	    }
+
+	    function updateData() {
+	    	getAllData();
+	    }
+
+	</script>
+</body>
+</html>
