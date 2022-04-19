@@ -107,6 +107,7 @@
 		getAllData();
 		function getAllData() {
 			var httpReq = new XMLHttpRequest();
+			
 			httpReq.open( "GET", url, false ); // false for synchronous request
 		    httpReq.send( null );
 		    var finalData = JSON.parse(httpReq.responseText);
