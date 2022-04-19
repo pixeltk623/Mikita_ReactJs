@@ -22,7 +22,7 @@
 			text-align: center;
 		}
 
-		input[type=text],select {
+		input[type=text],input[type=email],input[type=number],select {
 			height: 30px;
 			width: -webkit-fill-available;
 		}
@@ -64,27 +64,37 @@
 							<tr>
 								<th>Name</th>
 								<td>
-									<select name="userId" id="userId">
-										<option value="">Select</option>
-										<option value="1">Sharvan Kumar</option>
-									</select>
+									<input type="text" name="name" id="name">
 									<span id="e1"></span>
 								</td>
 							</tr>
 
 							<tr>
-								<th>Title</th>
+								<th>Email</th>
 								<td>
-									<input type="text" name="title" id="title">
+									<input type="email" name="email" id="email">
 									<span id="e2"></span>
 								</td>
 							</tr>
 
 							<tr>
-								<th>Body</th>
+								<th>Age</th>
 								<td>
-									<textarea name="body" id="body"></textarea>
+									<input type="number" name="age" id="age">
 									<span id="e3"></span>
+								</td>
+							</tr>
+
+							<tr>
+								<th>Designation</th>
+								<td>
+									<select name="designation" id="designation">
+										<option value="">Select</option>
+										<option value="PHP">PHP</option>
+										<option value="Java">Java</option>
+										<option value="Python">Python</option>
+									</select>
+									<span id="e4"></span>
 								</td>
 							</tr>
 
@@ -103,30 +113,45 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		var url = "https://jsonplaceholder.typicode.com/users";
+
+
+		var url = "http://localhost/rest-api/api/read.php";
 		getAllData();
 		function getAllData() {
 			var httpReq = new XMLHttpRequest();
 			
-			httpReq.open( "GET", url, false ); // false for synchronous request
-		 	
-		 	// This is Test API
+			httpReq.open( "GET", url, false );
 
 		    httpReq.send( null );
 		    var finalData = JSON.parse(httpReq.responseText);
+		    
+		    var bodyData =  finalData.body;
+
+		    console.log(bodyData);	
+
+		    //var b = JSON.parse(response);  //solves the problem
+
+		    //console.log(httpReq.responseText.replace(/['"]+/g, ''));
+
+
+
 		    var html = '';
 		    html += '<table border="1" style="border-collapse:collapse; width: 80%;">';
 			    html += '<tr>';
 			    	html += '<th>Sr.No</th>';
 			    	html += '<th>Name</th>';
 			    	html += '<th>Email</th>';
+			    	html += '<th>Age</th>';
+			    	html += '<th>Designation</th>';
 			    	html += '<th>Action</th>';
 			    html += '</tr>';
-		    for(var i = 0; i<finalData.length; i++) {
+		    for(var i = 0; i<bodyData.length; i++) {
 		    	html += '<tr>';
 		    		html += '<td>'+(i+1)+'</td>';
-			    	html += '<td>'+finalData[i].name+'</td>';
-			    	html += '<td>'+finalData[i].email+'</td>';
+			    	html += '<td>'+bodyData[i].name+'</td>';
+			    	html += '<td>'+bodyData[i].email+'</td>';
+			    	html += '<td>'+bodyData[i].age+'</td>';
+			    	html += '<td>'+bodyData[i].designation+'</td>';
 			    	html += '<th style="display: inline-flex;"><button type="button" class="edit">Edit</button> <button type="button" class="delete" onclick="deleteData()">Delete</button></th>';
 			    html += '</tr>';
 		    }
@@ -138,42 +163,50 @@
 	    	var e1 		= 	document.getElementById('e1');
 	    	var e2 		= 	document.getElementById('e2');
 	    	var e3 		= 	document.getElementById('e3');
-	    	var userId 	= 	document.getElementById('userId').value;
-	    	var title 	= 	document.getElementById('title').value;
-	    	var body 	= 	document.getElementById('body').value;
+	    	var e4 		= 	document.getElementById('e4');
 
-	    	//console.log(userId, title, body)
+	    	var nameOfUser 	= 	document.getElementById('name').value;
+	    	var email 	= 	document.getElementById('email').value;
+	    	var age 	= 	document.getElementById('age').value;
+	    	var designation 	= 	document.getElementById('designation').value;
 
-	    	if(userId=='') {
+	    	if(nameOfUser=='') {
 	    		e1.innerHTML = 'Name can not be blank';
 	    		e1.style.color = 'red';
 	    	} else {
 	    		e1.innerHTML = '';
 	    	}
 
-	    	if(title=='') {
-	    		e2.innerHTML = 'Title can not be blank';
+	    	if(email=='') {
+	    		e2.innerHTML = 'Email can not be blank';
 	    		e2.style.color = 'red';
 	    	} else {
 	    		e2.innerHTML = '';
 	    	}
 
-	    	if(body=='') {
-	    		e3.innerHTML = 'Body can not be blank';
+	    	if(age=='') {
+	    		e3.innerHTML = 'Age can not be blank';
 	    		e3.style.color = 'red';
 	    	} else {
 	    		e3.innerHTML = '';
 	    	}
 
-	    	if((userId && title && body)!=='') {
+	    	if(designation=='') {
+	    		e4.innerHTML = 'designation can not be blank';
+	    		e4.style.color = 'red';
+	    	} else {
+	    		e4.innerHTML = '';
+	    	}
+
+	    	if((nameOfUser && email && age && designation)!=='') {
 	    		
-	    		let formData = {userId: userId, title: title, body: body};
+	    		let formData = {name: nameOfUser, email: email, age: age, designation: designation, created: "2022-06-06 05:12:50"};
 
 	    		let myJSONData = JSON.stringify(formData);
 
 
 	    		var httpReq = new XMLHttpRequest();
-				httpReq.open( "POST", url, true ); // false for synchronous request
+				httpReq.open( "POST", "http://localhost/rest-api/api/create.php", true ); // false for synchronous request
 			    httpReq.send( myJSONData );
 
 			    getAllData();
