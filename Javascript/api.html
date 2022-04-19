@@ -109,6 +109,9 @@
 			var httpReq = new XMLHttpRequest();
 			/* Hello this is javascript API CAll */
 			httpReq.open( "GET", url, false ); // false for synchronous request
+		 	
+		 	// This is Test API
+
 		    httpReq.send( null );
 		    var finalData = JSON.parse(httpReq.responseText);
 		    var html = '';
