@@ -107,7 +107,7 @@
 		getAllData();
 		function getAllData() {
 			var httpReq = new XMLHttpRequest();
-			
+			/* Hello this is javascript API CAll */
 			httpReq.open( "GET", url, false ); // false for synchronous request
 		    httpReq.send( null );
 		    var finalData = JSON.parse(httpReq.responseText);
