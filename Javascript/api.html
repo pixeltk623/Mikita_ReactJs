@@ -14,7 +14,7 @@
 		}
 
 		.col-6 {
-			width: 50%;
+			width: 42%;
 			float: left;
 		}
 
@@ -45,10 +45,31 @@
 			background-color: blue;
 		}
 
+		.show {
+			background-color: black;
+			margin-right: 5px;
+		}
+
 		button {
 			padding: 10px 20px;
 			color: white;
 			border: none;
+		}
+
+		.alert {
+			
+			color: white;
+			padding: 20px 10px;
+			margin: 10px 10px 10px 30px;
+			width: 50%;
+		}
+
+		#alert-danger {
+			background-color: red;
+		}
+
+		#alert-success {
+			background-color: lightgreen;
 		}
 	</style>
 </head>
@@ -56,10 +77,17 @@
 
 	<div class="container">
 		<h1>CRUD Operations In Javascript</h1>
+		<div class="alert" id="alert-success">
+			<strong>Success!</strong> User is Deleted	
+		</div>
+
+		<div class="alert" id="alert-danger">
+			<strong>Oops!</strong> Somehing Error
+		</div>
 		<div class="row">
 			<div class="col-6">
 				<div id="form">
-					<form method="POST">
+					<form method="POST" id="addNewEmployee">
 						<table border="1" style="border-collapse:collapse; width: 90%;">
 							<tr>
 								<th>Name</th>
@@ -114,6 +142,11 @@
 	</div>
 	<script type="text/javascript">
 
+		let alertSuccess = document.getElementById('alert-success');
+		let alertDanger = document.getElementById('alert-danger');
+
+		alertSuccess.style.display = 'none';
+		alertDanger.style.display = 'none';
 
 		var url = "http://localhost/rest-api/api/read.php";
 		getAllData();
@@ -130,9 +163,17 @@
 		    httpReq.send( null );
 		    var finalData = JSON.parse(httpReq.responseText);
 		    
-		    var bodyData =  finalData.body;
+		    if(httpReq.status==404) {
+		    	var notFound = finalData.message;
+		    } else {
+		    	var bodyData =  finalData.body;	
+		    }
 
-		    console.log(bodyData);	
+		    
+
+		    console.log(notFound);	
+
+		    console.log(httpReq.status);
 
 		    //var b = JSON.parse(response);  //solves the problem
 
@@ -150,16 +191,27 @@
 			    	html += '<th>Designation</th>';
 			    	html += '<th>Action</th>';
 			    html += '</tr>';
-		    for(var i = 0; i<bodyData.length; i++) {
-		    	html += '<tr>';
-		    		html += '<td>'+(i+1)+'</td>';
-			    	html += '<td>'+bodyData[i].name+'</td>';
-			    	html += '<td>'+bodyData[i].email+'</td>';
-			    	html += '<td>'+bodyData[i].age+'</td>';
-			    	html += '<td>'+bodyData[i].designation+'</td>';
-			    	html += '<th style="display: inline-flex;"><button type="button" class="edit">Edit</button> <button type="button" class="delete" onclick="deleteData()">Delete</button></th>';
+
+
+			if(httpReq.status==404) {
+
+				html += '<tr>';
+			    		html += '<td colspan="6" style="text-align: center;">'+notFound+'</td>';
 			    html += '</tr>';
-		    }
+
+			} else {
+
+			    for(var i = 0; i<bodyData.length; i++) {
+			    	html += '<tr>';
+			    		html += '<td>'+(i+1)+'</td>';
+				    	html += '<td>'+bodyData[i].name+'</td>';
+				    	html += '<td>'+bodyData[i].email+'</td>';
+				    	html += '<td>'+bodyData[i].age+'</td>';
+				    	html += '<td>'+bodyData[i].designation+'</td>';
+				    	html += '<th style="display: inline-flex;"><button type="button" class="edit">Edit</button> <button type="button" class="show" onclick="showData(`'+bodyData[i].id+'`)">Show</button>  <button type="button" class="delete" onclick="deleteData(`'+bodyData[i].id+'`)">Delete</button></th>';
+				    html += '</tr>';
+			    }
+			}
 		    html += '</table>';
 		    document.getElementById('result').innerHTML = html;
 		}
@@ -214,16 +266,44 @@
 				httpReq.open( "POST", "http://localhost/rest-api/api/create.php", true ); // false for synchronous request
 			    httpReq.send( myJSONData );
 
-			    getAllData();
+			 	getAllData();
+			 	document.getElementById("addNewEmployee").reset();
 
 	    	}
 
 	    	return false;
 	    }
 
-	    function deleteData() {
-	    	console.log('Hello');
-	    	getAllData();
+	    function deleteData(userId) {
+	    	var myJSONData = {id: userId};
+	    	myJSONData = JSON.stringify(myJSONData);
+	    	var httpReq = new XMLHttpRequest();
+/*	    	httpReq.setRequestHeader("Content-Type", "application/json");*/
+
+			httpReq.open( "POST", "http://localhost/rest-api/api/delete.php", true ); // false for synchronous request
+		    httpReq.send( myJSONData );
+
+		    /*console.log(httpReq.responseText);*/
+
+		    httpReq.onload = function () {
+
+		    	if (httpReq.status===200) {
+		    		alertSuccess.style.display = 'block';
+					getAllData();
+		    	} else {
+		    		alertDanger.style.display = 'block';
+		    	}
+
+		    	setTimeout(myGreeting, 2000);
+
+			};
+
+			function myGreeting() {
+				alertSuccess.style.display = 'none';
+				alertDanger.style.display = 'none';
+			}
+
+	    	//getAllData();
 	    }
 
 	    function editData() {
@@ -232,6 +312,21 @@
 
 	    function updateData() {
 	    	getAllData();
+	    }
+
+	    function showData(id){
+	    	var httpReq = new XMLHttpRequest();
+			
+			httpReq.open( "GET", "http://localhost/rest-api/api/single_read.php?id="+id+"", false );
+
+		 	// This is Test API
+
+		    httpReq.send( null );
+		    var finalData = JSON.parse(httpReq.responseText);
+
+		    console.log(finalData);
+
+		    alert(finalData.name);
 	    }
 
 	</script>
