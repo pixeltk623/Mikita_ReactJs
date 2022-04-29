@@ -32,18 +32,54 @@
 			height: 80px;
 		}
 
+		.edit {
+			background-color: blue;
+			margin-right: 5px;
+		}
+
+		.delete {
+			background-color: red;
+		}
+
+		.submit {
+			background-color: blue;
+		}
+		button {
+			padding: 15px 20px;
+			color: white;
+			border: none;
+		}
+		.show {
+			background-color: darkgray;
+			margin-right: 5px;
+		}
+
+		.alert {
+			color: white;
+			padding: 20px 10px;
+			margin: 10px 10px 10px 30px;
+			width: 50%;
+		}
+
+		#alert-danger {
+			background-color: red;
+		}
+
+		#alert-success {
+			background-color: rgb(17, 233, 31);
+		}
     </style>
 </head>
 <body>
     <div class="container">
 		<h1>CRUD Operations In Javascript</h1>
-		<!-- <div class="alert" id="alert-success">
+		<div class="alert" id="alert-success">
 			<strong>Success!</strong> User is Deleted	
 		</div>
 
 		<div class="alert" id="alert-danger">
 			<strong>Oops!</strong> Somehing Error
-		</div> -->
+		</div>
 		<div class="row">
 			<div class="col-6">
 				<div id="form">
@@ -88,7 +124,7 @@
 
 							<tr>
 								<th colspan="2">
-									<button type="submit" name="submit" class="send" onclick="return submitData();">Submit</button>
+									<button type="submit" name="submit" class="submit" onclick="return submitData();">Submit</button>
 								</th>
 							</tr>
 						</table>
@@ -102,7 +138,7 @@
 	</div>
 
     <script type="text/javascript">
-		  var url = "http://localhost:8080/api/create.php";
+		  var url = "http://localhost/rest-api/api/read.php";
         // var url = "http://localhost/rest-api/api/read.php";
         getAllData();
 		function getAllData() {
@@ -112,9 +148,18 @@
             httpReq.send( null );
 		    var finalData = JSON.parse(httpReq.responseText);
                 // consol.log(finalData.body);
-            var bodyData = finalData.body;
-            console.log(bodyData);
+				
+				if(httpReq.status==404) {
+		    	var notFound = finalData.message;
+		    } else {
+		    	var bodyData =  finalData.body;	
+		    }
+            // var bodyData = finalData.body;
+            // console.log(bodyData);
 
+			console.log(notFound);	
+
+		    console.log(httpReq.status);
             var html = '';
 		        html += '<table border="1" style="border-collapse:collapse; width: 80%;">';
 			        html += '<tr>';
@@ -134,19 +179,19 @@
 				    	html += '<td>'+bodyData[i].email+'</td>';
 				    	html += '<td>'+bodyData[i].age+'</td>';
 				    	html += '<td>'+bodyData[i].designation+'</td>';
-				    	html += '<th style="display: inline-flex;"><button type="button" class="edit">Edit</button> <button type="button" class="delete" onclick="deleteData(`'+bodyData[i].id+'`)">Delete</button></th>';
+				    	html += '<th style="display: inline-flex;"><button type="button" class="edit">Edit</button> <button type="button" class="show" onclick="showData(`'+bodyData[i].id+'`)">Show</button> <button type="button" class="delete" onclick="deleteData(`'+bodyData[i].id+'`)">Delete</button></th>';
 				    html += '</tr>';
                 }
+				html += '</table>';
+		   	document.getElementById('result').innerHTML = html;
         }
-		    html += '</table>';
-		    document.getElementById('result').innerHTML = html;
-		
-
-            function submitData() {
-	    	    var e1 	= 	document.getElementById('e1');
-	    	    var e2 	= 	document.getElementById('e2');
-	    	    var e3 	= 	document.getElementById('e3');
-	    	    var e4 	= 	document.getElementById('e4');
+		   	
+        function submitData() {
+			
+	    	var e1 	= 	document.getElementById('e1');
+	    	var e2 	= 	document.getElementById('e2');
+	    	var e3 	= 	document.getElementById('e3');
+	    	var e4 	= 	document.getElementById('e4');
 
 	    	var nameOfUser =document.getElementById('name').value;
 	    	var email = 	document.getElementById('email').value;
@@ -180,6 +225,87 @@
 	    	} else {
 	    		e4.innerHTML = '';
 	    	}
+			if ((nameOfUser && email && age && designation) !=''){
+				let formData = {name:nameOfUser, email:email, age:age, designation:designation};
+				// console.log(formData);
+				let myJSONData = JSON.stringify(formData);
+				console.log(myJSONData);
+				var httpReq = new XMLHttpRequest();
+			
+				var url =	"http://localhost/rest-api/api/create.php";
+				httpReq.open("POST", url, true);
+				httpReq.send(myJSONData);
+
+				httpReq.onload = function () {
+					console.log(httpReq.status);
+					if(httpReq.status==200) {
+						alert("data inserted");
+						document.getElementById('addNewEmployee').reset();
+						getAllData();
+					} else {
+						alert("somethimg error");
+					}
+				};	
+
+			}
+			return false;	
+		}
+		function deleteData (id){
+			var myJSONData = {id: id};
+	    	myJSONData = JSON.stringify(myJSONData);
+	    	var httpReq = new XMLHttpRequest();
+			//
+
+			var url = "http://localhost/rest-api/api/delete.php"
+			httpReq.open("POST", url , true);
+			httpReq.send(myJSONData);
+			// console.log(httpReq);
+
+			httpReq.onload = function () {
+
+				if (httpReq.status===200) {
+					alertSuccess.style.display = 'block';
+					getAllData();
+				} else {
+					alertDanger.style.display = 'block';
+				}
+				setTimeout(myGreeting, 3000);
+			};
+			function myGreeting() {
+				alertSuccess.style.display = 'none';
+				alertDanger.style.display = 'none';
+			}
+
+			// httpReq.send( null );
+		    // var finalData = JSON.parse(httpReq.responseText);
+		    
+		    // if(httpReq.status==404) {
+		    // 	var notFound = finalData.message;
+		    // } else {
+		    // 	var bodyData =  finalData.body;	
+		    // }
+
+
+			}
+			function editData() {
+	    	getAllData();
+	   		}
+
+	   		function updateData() {
+	    	getAllData();
+	    	}
+
+	    	function showData(id){
+	    	var httpReq = new XMLHttpRequest();
+			
+			httpReq.open( "GET", "http://localhost/rest-api/api/single_read.php?id="+id+"", false )
+		    httpReq.send( null );
+		    var finalData = JSON.parse(httpReq.responseText);
+
+		    console.log(finalData);
+
+		    alert(finalData.name);
+	    }
     </script>
 </body>
 </html>
