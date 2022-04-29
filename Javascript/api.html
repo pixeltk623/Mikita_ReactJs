@@ -45,6 +45,10 @@
 			background-color: blue;
 		}
 
+		.update {
+			background-color: blue;
+		}
+
 		.show {
 			background-color: black;
 			margin-right: 5px;
@@ -127,8 +131,8 @@
 							</tr>
 
 							<tr>
-								<th colspan="2">
-									<button type="submit" name="submit" class="send" onclick="return submitData();">Submit</button>
+								<th colspan="2" id="btn_add_update">
+									<button type="submit" id="btn_add" name="submit" class="send" onclick="return submitData();">Submit</button>
 								</th>
 							</tr>
 						</table>
@@ -208,7 +212,7 @@
 				    	html += '<td>'+bodyData[i].email+'</td>';
 				    	html += '<td>'+bodyData[i].age+'</td>';
 				    	html += '<td>'+bodyData[i].designation+'</td>';
-				    	html += '<th style="display: inline-flex;"><button type="button" class="edit">Edit</button> <button type="button" class="show" onclick="showData(`'+bodyData[i].id+'`)">Show</button>  <button type="button" class="delete" onclick="deleteData(`'+bodyData[i].id+'`)">Delete</button></th>';
+				    	html += '<th style="display: inline-flex;"><button type="button" class="edit" onclick="editData(`'+bodyData[i].id+'`)">Edit</button> <button type="button" class="show" onclick="showData(`'+bodyData[i].id+'`)">Show</button>  <button type="button" class="delete" onclick="deleteData(`'+bodyData[i].id+'`)">Delete</button></th>';
 				    html += '</tr>';
 			    }
 			}
@@ -306,12 +310,95 @@
 	    	//getAllData();
 	    }
 
-	    function editData() {
-	    	getAllData();
+	    function editData(id) {
+
+	    	document.getElementById('btn_add').style.display = 'none';
+
+	    	document.getElementById('btn_add_update').innerHTML = "<button type='submit' id='btn_update' name='update' class='update' onclick='return updateData("+id+");'>Update</button>";
+
+	    	var httpReq = new XMLHttpRequest();
+	    	httpReq.open( "GET", "http://localhost/rest-api/api/single_read.php?id="+id+"", false );
+
+	    	httpReq.send( null );
+		    var finalData = JSON.parse(httpReq.responseText);
+
+		    console.log(finalData);
+		    document.getElementById('name').value = finalData.name;
+		    document.getElementById('email').value = finalData.email;
+		    document.getElementById('age').value = finalData.age;
+		    var op = document.getElementById('designation').options;
+		    for (let i = 0; i < op.length; i++) {
+		    	if(op[i].value==finalData.designation) {
+		    		op[i].setAttribute('selected', true);
+		
+		    	} 
+			  
+			}
+
+		    console.log(op);
+
+
+	    	/*getAllData();*/
 	    }
 
-	    function updateData() {
-	    	getAllData();
+	    function updateData(id) {
+
+	    	var e1 		= 	document.getElementById('e1');
+	    	var e2 		= 	document.getElementById('e2');
+	    	var e3 		= 	document.getElementById('e3');
+	    	var e4 		= 	document.getElementById('e4');
+
+	    	var nameOfUser 	= 	document.getElementById('name').value;
+	    	var email 	= 	document.getElementById('email').value;
+	    	var age 	= 	document.getElementById('age').value;
+	    	var designation 	= 	document.getElementById('designation').value;
+
+	    	if(nameOfUser=='') {
+	    		e1.innerHTML = 'Name can not be blank';
+	    		e1.style.color = 'red';
+	    	} else {
+	    		e1.innerHTML = '';
+	    	}
+
+	    	if(email=='') {
+	    		e2.innerHTML = 'Email can not be blank';
+	    		e2.style.color = 'red';
+	    	} else {
+	    		e2.innerHTML = '';
+	    	}
+
+	    	if(age=='') {
+	    		e3.innerHTML = 'Age can not be blank';
+	    		e3.style.color = 'red';
+	    	} else {
+	    		e3.innerHTML = '';
+	    	}
+
+	    	if(designation=='') {
+	    		e4.innerHTML = 'designation can not be blank';
+	    		e4.style.color = 'red';
+	    	} else {
+	    		e4.innerHTML = '';
+	    	}
+
+	    	if((nameOfUser && email && age && designation)!=='') {
+	    		
+	    		let formData = {id: id, name: nameOfUser, email: email, age: age, designation: designation, created: "2022-06-06 05:12:50"};
+
+	    		let myJSONData = JSON.stringify(formData);
+
+
+	    		var httpReq = new XMLHttpRequest();
+				httpReq.open( "POST", "http://localhost/rest-api/api/update.php", true ); // false for synchronous request
+			    httpReq.send( myJSONData );
+				document.getElementById('btn_add').style.display = 'block';
+				document.getElementById('btn_update').style.display = 'none';			    
+			 	getAllData();
+			 	document.getElementById("addNewEmployee").reset();
+
+	    	}
+
+	    	return false;
 	    }
 
 	    function showData(id){
