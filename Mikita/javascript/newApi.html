@@ -68,6 +68,10 @@
 		#alert-success {
 			background-color: rgb(17, 233, 31);
 		}
+
+		.update {
+			background-color: blue;
+		}
     </style>
 </head>
 <body>
@@ -123,8 +127,8 @@
 							</tr>
 
 							<tr>
-								<th colspan="2">
-									<button type="submit" name="submit" class="submit" onclick="return submitData();">Submit</button>
+								<th colspan="2" id="btn_add_update">
+									<button type="submit" id="btn_add" name="submit" class="submit" onclick="return submitData();">Submit</button>
 								</th>
 							</tr>
 						</table>
@@ -138,6 +142,13 @@
 	</div>
 
     <script type="text/javascript">
+		let alertSuccess = document.getElementById('alert-success');
+		let alertDanger = document.getElementById('alert-danger');
+
+		alertSuccess.style.display = 'none';
+		alertDanger.style.display = 'none';
+
+
 		  var url = "http://localhost/rest-api/api/read.php";
         // var url = "http://localhost/rest-api/api/read.php";
         getAllData();
@@ -147,6 +158,11 @@
 			httpReq.open( "GET", url, false );
             httpReq.send( null );
 		    var finalData = JSON.parse(httpReq.responseText);
+			if(httpReq.status==404) {
+		    	var notFound = finalData.message;
+		    } else {
+		    	var bodyData =  finalData.body;	
+		    }
              
             var html = '';
 		        html += '<table border="1" style="border-collapse:collapse; width: 80%;">';
@@ -168,18 +184,16 @@
 
 			        } else {
 
-			        	for(var i = 0; i<finalData.body.length; i++) {
+			        	for(var i = 0; i<bodyData.length; i++) {
 					    	html += '<tr>';
 					    		html += '<td>'+(i+1)+'</td>';
-						    	html += '<td>'+finalData.body[i].name+'</td>';
-						    	html += '<td>'+finalData.body[i].email+'</td>';
-						    	html += '<td>'+finalData.body[i].age+'</td>';
-						    	html += '<td>'+finalData.body[i].designation+'</td>';
-						    	html += '<th style="display: inline-flex;"><button type="button" class="edit">Edit</button> <button type="button" class="show" onclick="showData(`'+finalData.body[i].id+'`)">Show</button> <button type="button" class="delete" onclick="deleteData(`'+finalData.body[i].id+'`)">Delete</button></th>';
+						    	html += '<td>'+bodyData[i].name+'</td>';
+						    	html += '<td>'+bodyData[i].email+'</td>';
+						    	html += '<td>'+bodyData[i].age+'</td>';
+						    	html += '<td>'+bodyData[i].designation+'</td>';
+						    	html += '<th style="display: inline-flex;"><button type="button" class="edit" onclick="editData(`'+bodyData[i].id+'`)">Edit</button> <button type="button" class="show" onclick="showData(`'+bodyData[i].id+'`)">Show</button> <button type="button" class="delete" onclick="deleteData(`'+bodyData[i].id+'`)">Delete</button></th>';
 						    html += '</tr>';	
 			        }
-
-                    
                 }
 				html += '</table>';
 		   	document.getElementById('result').innerHTML = html;
@@ -226,7 +240,7 @@
 	    	}
 			if ((nameOfUser && email && age && designation) !=''){
 				let formData = {name:nameOfUser, email:email, age:age, designation:designation};
-				// console.log(formData);
+				
 				let myJSONData = JSON.stringify(formData);
 				console.log(myJSONData);
 				var httpReq = new XMLHttpRequest();
@@ -253,7 +267,6 @@
 			var myJSONData = {id: id};
 	    	myJSONData = JSON.stringify(myJSONData);
 	    	var httpReq = new XMLHttpRequest();
-			//
 
 			var url = "http://localhost/rest-api/api/delete.php"
 			httpReq.open("POST", url , true);
@@ -263,12 +276,12 @@
 			httpReq.onload = function () {
 
 				if (httpReq.status===200) {
-					//alertSuccess.style.display = 'block';
+					alertSuccess.style.display = 'block';
 					getAllData();
 				} else {
 					alertDanger.style.display = 'block';
 				}
-				setTimeout(myGreeting, 3000);
+				setTimeout(myGreeting, 2000);
 			};
 			function myGreeting() {
 				alertSuccess.style.display = 'none';
@@ -276,13 +289,94 @@
 			}
 
 			}
-			function editData() {
-	    	getAllData();
+
+			function editData(id) {
+
+			document.getElementById('btn_add').style.display = 'none';
+
+			document.getElementById('btn_add_update').innerHTML = "<button type='submit' id='btn_update' name='update' class='update' onclick='return updateData("+id+");'>Update</button>";
+
+			var httpReq = new XMLHttpRequest();
+			httpReq.open("GET" , "http://localhost/rest-api/api/single_read.php?id="+id+"", false);
+
+			httpReq.send( null );
+			var finalData = JSON.parse(httpReq.responseText);
+			// console.log(finalData);
+
+			document.getElementById('name').value = finalData.name;
+		    document.getElementById('email').value = finalData.email;
+		    document.getElementById('age').value = finalData.age;
+		    var op = document.getElementById('designation').options;
+		    for (let i = 0; i < op.length; i++) {
+		    	if(op[i].value==finalData.designation) {
+		    		op[i].setAttribute('selected', true);
+		
+		    	} 
+			  
+			}
+			console.log(op);
+
+	    	// getAllData();
 	   		}
 
-	   		function updateData() {
-	    	getAllData();
+	   		function updateData(id) {
+			var e1 		= 	document.getElementById('e1');
+	    	var e2 		= 	document.getElementById('e2');
+	    	var e3 		= 	document.getElementById('e3');
+	    	var e4 		= 	document.getElementById('e4');
+
+	    	var nameOfUser 	= 	document.getElementById('name').value;
+	    	var email 	= 	document.getElementById('email').value;
+	    	var age 	= 	document.getElementById('age').value;
+	    	var designation 	= 	document.getElementById('designation').value;
+
+	    	if(nameOfUser=='') {
+	    		e1.innerHTML = 'Name can not be blank';
+	    		e1.style.color = 'red';
+	    	} else {
+	    		e1.innerHTML = '';
 	    	}
+
+	    	if(email=='') {
+	    		e2.innerHTML = 'Email can not be blank';
+	    		e2.style.color = 'red';
+	    	} else {
+	    		e2.innerHTML = '';
+	    	}
+
+	    	if(age=='') {
+	    		e3.innerHTML = 'Age can not be blank';
+	    		e3.style.color = 'red';
+	    	} else {
+	    		e3.innerHTML = '';
+	    	}
+
+	    	if(designation=='') {
+	    		e4.innerHTML = 'designation can not be blank';
+	    		e4.style.color = 'red';
+	    	} else {
+	    		e4.innerHTML = '';
+	    	}
+
+	    	if((nameOfUser && email && age && designation)!=='') {
+	    		
+	    		let formData = {id: id, name: nameOfUser, email: email, age: age, designation: designation, created: "2022-06-06 05:12:50"};
+
+	    		let myJSONData = JSON.stringify(formData);
+
+
+	    		var httpReq = new XMLHttpRequest();
+				httpReq.open( "POST", "http://localhost/rest-api/api/update.php", true ); 
+			    httpReq.send( myJSONData );
+				document.getElementById('btn_add').style.display = 'block';
+				document.getElementById('btn_update').style.display = 'none';			    
+			 	getAllData();
+			 	document.getElementById("addNewEmployee").reset();
+
+	    	}
+
+	    	return false;
+	    }
 
 	    	function showData(id){
 	    	var httpReq = new XMLHttpRequest();
