@@ -344,3 +344,115 @@ console.log(cname);*/
 
 // Email => Regix 
 //Requred
+
+class SalarySlip {
+    
+    constructor(ename,bsalary) {
+
+        this.ename = ename;
+        this.bsalary = bsalary;
+    }
+
+    getEmployeeName() {
+        if(this.ename=='') {
+            return false;
+        } else {
+            return this.ename;
+        }
+    }
+
+    getSalary() {
+        if(this.bsalary=='') {
+            return false;
+        } else {
+            return this.bsalary;
+        }
+    }
+
+    calculateHRA() {
+        return (this.bsalary*25)/100;
+    }
+
+    calculateCA() {
+        return (this.bsalary*5)/100;
+    }
+
+    calculateMedical() {
+        return (this.bsalary*10)/100;
+    }
+
+    calculatePF() {
+        return (this.bsalary*12)/100;
+    }
+
+    calculateESI() {
+        return (this.bsalary*7)/100;
+    }
+
+    totalGross() {
+        return this.calculateHRA() + this.calculateCA();
+    }
+
+    earning() {
+        return this.calculateHRA() + this.calculateCA() + this.calculateMedical();
+    }
+
+    deducation() {
+        return this.calculatePF() + this.calculateESI();
+    }
+
+    takeHome() {
+        this.totalGross() - this.deducation();
+    }
+
+}
+
+
+function calculateSalary() {
+    //    
+
+    let ename       =   document.getElementById('ename').value;
+    let bsalary     =   document.getElementById('bsalary').value;
+
+    let objectSalary = new SalarySlip(ename,bsalary);
+
+
+    console.log(objectSalary.getEmployeeName());
+
+    if(objectSalary.getEmployeeName()==false) {
+        document.getElementById('e1').innerHTML = 'Name field is required';
+    } else {
+        document.getElementById('e1').innerHTML = '';
+    }
+
+    if(objectSalary.getSalary()==false) {
+        document.getElementById('e2').innerHTML = 'Salary field is required';
+    } else {
+        document.getElementById('e2').innerHTML = '';
+    }
+
+    if(bsalary!='') {
+
+        console.log(objectSalary.totalGross());
+
+    }
+}
+
+// bs = 5000
+
+// HRA => bs of 25%
+
+// CA => 5%
+
+// MA => 10%
+
+// Earning
+
+// deducation
+
+
+//PF = 12%
+// ESI = 7%
+// pt = 200
+
+
