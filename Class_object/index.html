@@ -5,8 +5,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style type="text/css">
+        table {
+			margin: auto;
+		}
+		table tr th,td {
+			padding: 10px;
+		}
+        h1 {
+            text-align: center;
+        }
+        .button {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 5px;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+    <form method="post">
+        <h1>Form Validation</h1>
+        <table>
+            <tr>
+                <th>Username</th>
+                <td><input type="text" name="Username" id="name" placeholder="User Name"></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><input type="text" name="email" id="email" placeholder="E-mail"></td>
+            </tr>
+            <tr>
+                <th>Mobile No</th>
+                <td><input type="text" name="mobile" id="mobile" placeholder="Mobile Number"></td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td><textarea name="address" id="" cols="20" rows="5" placeholder="Address"></textarea></td>
+            </tr>
+            <tr>
+                <td><input type="submit" name="submit" class="button"></td>
+            </tr> 
+        </table>    
+    </form>
+    </div>
     <script src="index.js"></script>
+    
 </body>
 </html>
