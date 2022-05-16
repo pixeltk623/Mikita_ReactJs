@@ -25,10 +25,10 @@ class form {
     }
 }
   
-        function formValidation() {
-            let uname = document.getElementById('uname').value;
-            let email = document.getElementById('email').value;
-        }    
+    function formValidation() {
+        let uname = document.getElementById('uname').value;
+        let email = document.getElementById('email').value;
+        console.log ( uname, email);
 
         let objectForm = new form (uname,email);
 
@@ -39,6 +39,17 @@ class form {
         } else {
             document.getElementById('e1').innerHTML = '';
         }
+
+        if (objectForm.getFormEmail()=='') {
+            document.getElementById('e2').innerHTML = 'Email field is required';
+        } else {
+            document.getElementById('e2').innerHTML = '';
+        }
+        
+        return false;
+    }    
+
+        
 
 
 
