@@ -1,5 +1,7 @@
  
-class form {
+class Form {
+
+
 
     constructor (uname,email,mobile,address) {
         this.uname = uname;
@@ -47,45 +49,45 @@ class form {
         let regix = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
         let mobile = document.getElementById('mobile').value;
         let address = document.getElementById('address').value;
-        console.log ( uname, email,mobile, address);
+        //console.log ( uname, email,mobile, address);
 
-        let objectForm = new form (uname,email,mobile,address);
+        let objectForm = new Form(uname,email,mobile,address);
 
-        console.log(objectForm.getFormName());
-        console.log(objectForm.getFormEmail());
-        console.log(objectForm.getFormMobile());
-        console.log(objectForm.getFormAddress());
+        //console.log(objectForm.getFormName());
+        //console.log(objectForm.getFormEmail());
+        //console.log(objectForm.getFormMobile());
+        //console.log(objectForm.getFormAddress());
 
-        if (objectForm.getFormName()=='') {
+        if (objectForm.getFormName()==false) {
             document.getElementById('e1').innerHTML = 'Name field is required';
             document.getElementById('e1').style.color = "red";
         } else {
             document.getElementById('e1').innerHTML = '';
         }
 
-        if (objectForm.getFormEmail()=='') {
+        if (objectForm.getFormEmail()==false) {
             document.getElementById('e2').innerHTML = 'Email field is required';
             document.getElementById('e2').style.color = 'red';
         } else {
-            document.getElementById('e2').innerHTML = '';
+
+            console.log(regix.test(email));
+
+            if(regix.test(email)==false) {
+                document.getElementById('e2').innerHTML = 'Email id is not-correct';
+                document.getElementById('e2').style.color = 'red';
+            } else {
+                document.getElementById('e2').innerHTML = '';
+            }
         }
-        if (regix.test(email)){
-            document.getElementById('e2').innerHTML = 'Email id is correct';
-            document.getElementById('e2').style.color = 'green';
-        } else {
-            document.getElementById('e2').innerHTML = 'Email id is not-correct';
-            document.getElementById('e2').style.color = 'red';
-            return false;
-        }
-        
-        if (objectForm.getFormMobile()=='') {
+    
+        if (objectForm.getFormMobile()==false) {
             document.getElementById('e3').innerHTML = 'Mobile Number field is required';
             document.getElementById('e3').style.color = 'red';
         } else {
             document.getElementById('e3').innerHTML = '';
         }
 
-        if (objectForm.getFormAddress()=='') {
+        if (objectForm.getFormAddress()==false) {
             document.getElementById('e4').innerHTML = 'Address field is required';
             document.getElementById('e4').style.color = 'red';
         } else {
